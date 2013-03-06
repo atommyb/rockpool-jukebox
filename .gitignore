@@ -14,7 +14,7 @@ results
 node_modules
 npm-debug.log
 
-config.js
+#config.js
 
 *.sublime-*
 
@@ -83,3 +83,4 @@ packages/
 #Test files
 *.testsettings
 /populate-now.js
+DO NOT UPLOAD

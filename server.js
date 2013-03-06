@@ -163,7 +163,6 @@ function initialiseApplication(db) {
 	}
 
 	app.post('/data/stream', streamsCtrl.streamAdd);
-	app.post('/data/stream', streamsCtrl.streamAdd);
 	app.post('/data/item/:id/vote', streamsCtrl.submitVote);
 	app.post('/data/item/:id/played', streamsCtrl.itemMarkPlayed);
 	app.post('/data/stream/:streamId/playing', streamsCtrl.itemMarkPlaying);

@@ -49,6 +49,9 @@ MegaPlayer = function($) {
 					player.cueVideoById(match[1]);
 					player.setPlaybackQuality('hd720');
 					player.playVideo();
+					setTimeout(function() {
+						player.playVideo();
+					}, 3000);
 				};
 
 				if (youtubePlayer === null) {
@@ -59,7 +62,8 @@ MegaPlayer = function($) {
 						height: options.height,
 						playerVars: {
 		          start: 0,
-		          controls: '0'
+		          controls: config.YTControls,	          
+		          html5: config.YTHTML5
 		        },
 						events: {
 	          'onReady': function(evt) {  
@@ -222,7 +226,7 @@ MegaPlayer = function($) {
 						throw new Error("unsupported type");
 					}
 
-					var elem = $('<div id="' + type +  makeId() + '"></div>');
+					var elem = $('<div id="' + type +  makeId() + '" class="playerHolder"></div>');
 					$(element).append(elem);
 
 					players[type] = factories[type].call(this, elem, opts);

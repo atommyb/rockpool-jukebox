@@ -90,9 +90,11 @@ angular.module('jukeboxServices', ['ngResource'])
 				if (success) r.success(success);
 				if (fail) r.error(fail);
 			},
-			hostIsAlive : function(streamId) {
+			hostIsAlive : function(streamId, status) {
 				var url = "/data/stream/" + streamId + "/hostIsAlive";
-				var r = $http.post(url);
+				var r = $http.post(url, {
+					status : status
+				});
 			},
 			isHostAlive: function(streamId, success) {
 				var url = "/data/stream/" + streamId + "/hostIsAlive";

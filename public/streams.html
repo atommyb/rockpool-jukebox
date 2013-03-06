@@ -1,10 +1,10 @@
 <section id="streams" class="clearfix">
 
-	<h1 id="streamName">Jukebox</h1>
+	<h1 id="streamName">Rockpool's Jukebox</h1>
 
 	<section id="topRow" class="clearfix">
 
-		<section id="theStreams">
+		<section id="theStreams" style="display:none;">
 			<h2>Choose a stream...</h2>
 			<ul id="theStreamsList">
 				<li ng-repeat="stream in streams" class="clearfix">					
@@ -18,13 +18,30 @@
 
 
 		<form name="addStreamForm" id="addStreamForm" class="clearfix">
-			<h2>or create your own...</h2>
-			<div ng-class="{error: addStreamForm.name.$invalid}" >
-				<!-- <label>Name</label>			 -->
-				<input type="text" class="txt" name="name" ng-model="stream.name" required size="50" placeholder="Name your stream. e.g. 'My Awesome Playlist'" />
+			<h2>Here's how it works...</h2>
+			<ol class="instructions">	
+				<li class="clearfix"><em>1.</em><span>Create your company playlist below</span></li>
+				<li class="clearfix"><em>2.</em><span>Share your playlist with colleagues.</span></li>
+				<li class="clearfix"><em>3.</em><span>Start adding and playing songs from <img src="/img/youtube.png" alt="YouTube&trade;" /></span></li>
+				<li class="clearfix"><em>4.</em><span>Sign in to Facebook to vote for the songs you want to hear..</span></li>
+			</ol>
+			<div class="tips">
+				<h3>Top Jukebox tips...</h3>
+				<ul class="instructions">
+					<li>Host the Jukebox on a <strong>single</strong> PC or Laptop (Mac should be ok too) - <strong>speakers help!</strong></li>
+					<li><strong>Bookmark &amp; Share</strong> the link on the next page with your colleagues - they can add songs too!</li>
+					<li>Get your songs on next by voting <img src="/img/vUp.png" alt="Vote Up" class="voteUp" /></li>
+				</ul>
+			</div>	
+			<div ng-class="{error: addStreamForm.name.$invalid}" class="formWrap clearfix">
+				<h2>Let's get started!</h2>
+				<label>Name your playlist and let's go...</label>
+				<input type="text" class="txt" name="name" ng-model="stream.name" required size="50" placeholder="e.g. 'Acme Corp Playlist'" />
+				<button ng-click="addStream()" ng-disabled="addStreamForm.$invalid" class="btn btn-primary">Let's go!</button>
+				<!-- <img src="/img/poweredbyyoutube.png" alt="YouTube&trade;" style="display:inline;" class="poweredByYT" /> -->
 			</div>
 
-			<button ng-click="addStream()" ng-disabled="addStreamForm.$invalid" class="btn btn-primary">Create stream</button>
+
 		</form>
 
 	</section>
