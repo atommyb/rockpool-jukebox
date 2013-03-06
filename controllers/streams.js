@@ -360,6 +360,69 @@ module.exports = function(db, notifications, config) {
 			});
 		},
 
+		itemFindRecents: function(req, res, next) {
+			if (!req.params.streamId) {
+				res.send(400); return;
+			}
+			var past = new Date();
+			past.setDate(past.getDate() - 1);
+			var q = buildItemQuery(req, {
+				played:  true,	
+				lastPlayed : { $lte : past }
+			});
+
+			db.collection('items')
+			.find(q)
+			.sort({ lastPlayed: -1 })
+			.limit(10)
+			.toArray(function(err, result) {
+				if (err) return next(err);
+				res.send(result.map(function(i) { return processResult(i, req.user); }));
+			});
+		},
+
+		itemFindFavs: function(req, res, next) {
+			if (!req.params.streamId) {
+				res.send(400); return;
+			}
+			
+			var q = buildItemQuery(req, {
+				played:  true,				
+				playCount : { $gte : config.favsThreshold }
+			});
+
+			db.collection('items')
+			.find(q)
+			.sort({ playCount: 1 })
+			.limit(10)
+			.toArray(function(err, result) {
+				if (err) return next(err);
+				res.send(result.map(function(i) { return processResult(i, req.user); }));
+			});
+		},
+
+		itemFindUnFavs: function(req, res, next) {
+			if (!req.params.streamId) {
+				res.send(400); return;
+			}
+			
+			var past = new Date();
+			past.setDate(past.getDate() - 30);
+			var q = buildItemQuery(req, {
+				played:  true,				
+				lastPlayed : { $lte : past }
+			});
+
+			db.collection('items')
+			.find(q)
+			.sort({ playCount: -1 })
+			.limit(10)
+			.toArray(function(err, result) {
+				if (err) return next(err);
+				res.send(result.map(function(i) { return processResult(i, req.user); }));
+			});
+		},
+
 		itemFindOldest: function(req, res, next) {
 			if (!req.params.streamId) {
 				res.send(400); return;

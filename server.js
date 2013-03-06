@@ -147,6 +147,12 @@ function initialiseApplication(db) {
 
 	app.get('/data/stream/:streamId/item/count', streamsCtrl.itemCount);
 	app.get('/data/stream/:streamId/item/historic', streamsCtrl.itemFindHistoric);
+
+	app.get('/data/stream/:streamId/item/favs', streamsCtrl.itemFindFavs);
+	app.get('/data/stream/:streamId/item/unfavs', streamsCtrl.itemFindUnFavs);
+	app.get('/data/stream/:streamId/item/recents', streamsCtrl.itemFindRecents);
+
+
 	app.get('/data/stream/:streamId/item/oldest', streamsCtrl.itemFindOldest);
 	app.post('/data/stream/:streamId/item', streamsCtrl.itemAdd);
 	//app.get('/data/stream/:streamId/queryMedia', streamsCtrl.itemNewLookup);

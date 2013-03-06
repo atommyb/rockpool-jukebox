@@ -100,6 +100,11 @@ angular.module('jukeboxServices', ['ngResource'])
 				var url = "/data/stream/" + streamId + "/hostIsAlive";
 				var r = $http.get(url);
 				r.success(success);
+			},
+			getFavs: function(streamId, success) {
+				var url = "/data/stream/" + streamId + "/item/favs";
+				var r = $http.get(url);
+				r.success(success);
 			}
 		};
 	})

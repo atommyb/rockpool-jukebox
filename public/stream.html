@@ -3,12 +3,12 @@
 
 <section id="topRow" class="clearfix"  ng-class="{ searching : entry.youtubeResults , empty : !items.length , hasItems : items.length }">
 	<section class="controls clearfix">
-		<aside class="shareIt">
+		<!-- <aside class="shareIt">
 			<a href="mailto://&subject=I%20want%20to%20share%20{{stream.name | urlEncode}}%20on%20Rockpool's%20Jukebox&body=http://jukebox.rockpooldigital.com/#/stream/{{stream._id}}/{{stream.name | urlEncode | urlEncode }}" class="clearfix">
 				<img src="/img/email.png" alt="listen" class="" />
 				<em>Share the Jukebox with colleagues</em>
 			</a>
-		</aside>
+		</aside> -->
 		<script>
 			// iPad 1 doesnt like hosting
 			if(/mobile/i.test(navigator.userAgent) === true){
@@ -127,6 +127,24 @@
 			</li>
 		</ul>
 	</section>
+
+</div>
+
+<div id="fillIt">
+	<div class="col cfx favs">		
+		<h2>Add from favourites</h2>
+		<ul>
+			<li ng-repeat="fav in favourites" ng-class="{ added : fav.added , adding : fav.adding }" class="clearfix">
+				<a ng-click="addExistingItem(fav, true)" class="clearfix">
+					<img ng-src="{{fav.image}}" alt="{{fav.title}}" class="thumb" />
+					<strong class="title">{{ fav.title }} <br/>Total Plays:{{fav.previousPlays}} Total Votes:{{fav.historicVotes}}</strong>
+					<p ng-show="fav.album">{{fav.album}}</p>
+				</a>
+				<img ng-src="/img/addToPlaylist.png" alt="Add to playlist" class="addToPlaylist" ng-click="addExistingItem(fav, false)"  />
+				<em class="views" ng-show="fav.views > 0 ">{{ fav.views}} <i>views</i></em>
+			</li>
+		</ul>
+	</div>
 
 </div>
 

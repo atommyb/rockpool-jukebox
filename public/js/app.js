@@ -109,6 +109,10 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 		});		
 	});
 	
+
+	StreamData.getFavs(streamId, function(data) {
+		$scope.favourites = data;
+	})
 	$scope.addItem = function(item, closeResults) {
 		item.adding = true;
 		StreamData.addItem(streamId, { url : item.url }, function(saved) {
@@ -121,6 +125,29 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 				$scope.entry.youtubeResults = null;
 				$scope.entry.url = "";
 			}
+		}, function(err,a,b) {
+			if (err.data === "Duplicate") {
+				alert('This item is already queued');
+			} else {
+				alert('Unknown Error');
+			}
+			
+			item.adding = false;
+		});
+	};
+
+	$scope.addExistingItem = function(item, closeResults) {
+		item.adding = true;
+		StreamData.addItem(streamId, { url : item.url }, function(saved) {
+			item.added=  true;
+			item.adding = false;
+			//wait for notification instead
+			//$scope.items.push(saved);
+			//sortItems();
+			// if (closeResults || $scope.entry.youtubeResults.length <= 1) {
+			// 	$scope.entry.youtubeResults = null;
+			// 	$scope.entry.url = "";
+			// }
 		}, function(err,a,b) {
 			if (err.data === "Duplicate") {
 				alert('This item is already queued');
