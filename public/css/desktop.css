@@ -1631,25 +1631,19 @@ footer a img{
 	opacity: 0.3; 
 }*/
 
+#fillIt {margin: 4em 0;}
 #fillIt ul{
 	margin: 0;
 	padding: 1em 0 0 0;
 	font-size: 90%;
 }
-#fillIt li{
+
+
+
+#fillIt li {
 	margin: 0;
 	padding:0;	
 	list-style: none;
-}
-#fillIt li a{
-	float: left;
-	width: 77%;
-	padding: .5em 10px;	
-	text-decoration: none;
-}
-
-#fillIt li {
-
 /*property duration timing-function delay*/
 	-webkit-transition:all 0.2s;
 	-moz-transition:all 0.2s;
@@ -1673,6 +1667,14 @@ footer a img{
 #fillIt li:hover{
 	background: #eee;
 }
+
+#fillIt li a{
+	float: left;
+	width: 77%;
+	padding: .5em 10px;	
+	text-decoration: none;
+}
+
 #fillIt li .thumb{
 	float: left;
 	max-height: 70px;
