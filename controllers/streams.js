@@ -393,7 +393,7 @@ module.exports = function(db, notifications, config) {
 
 			db.collection('items')
 			.find(q)
-			.sort({ playCount: 1 })
+			.sort({ playCount: -1 })
 			.limit(10)
 			.toArray(function(err, result) {
 				if (err) return next(err);
@@ -401,6 +401,7 @@ module.exports = function(db, notifications, config) {
 			});
 		},
 
+		// 30 days old, not played much (descending order)
 		itemFindUnFavs: function(req, res, next) {
 			if (!req.params.streamId) {
 				res.send(400); return;

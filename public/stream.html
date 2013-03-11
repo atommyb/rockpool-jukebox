@@ -132,7 +132,7 @@
 
 <div id="fillIt">
 	<div class="col cfx favs">		
-		<h2>Add from favourites</h2>
+		<h2>Crowd favourites</h2>
 		<ul>
 			<li ng-repeat="fav in favourites" ng-class="{ added : fav.added , adding : fav.adding }" class="clearfix">
 				<a ng-click="addExistingItem(fav, true)" class="clearfix">
@@ -145,6 +145,35 @@
 			</li>
 		</ul>
 	</div>
+	<div class="col cfx recents">		
+		<h2>Recently played</h2>
+		<ul>
+			<li ng-repeat="rec in recents" ng-class="{ added : rec.added , adding : rec.adding }" class="clearfix">
+				<a ng-click="addExistingItem(rec, true)" class="clearfix">
+					<img ng-src="{{rec.image}}" alt="{{rec.title}}" class="thumb" />
+					<strong class="title">{{ rec.title }} <br/>Total Plays:{{rec.previousPlays}} Total Votes:{{rec.historicVotes}}</strong>
+					<p ng-show="rec.album">{{rec.album}}</p>
+				</a>
+				<img ng-src="/img/addToPlaylist.png" alt="Add to playlist" class="addToPlaylist" ng-click="addExistingItem(rec, false)"  />
+				<em class="views" ng-show="rec.views > 0 ">{{ rec.views}} <i>views</i></em>
+			</li>
+		</ul>
+	</div>
+	<div class="col cfx unfavs">		
+		<h2>Oldies</h2>
+		<ul>
+			<li ng-repeat="unfav in unfavourites" ng-class="{ added : unfav.added , adding : unfav.adding }" class="clearfix">
+				<a ng-click="addExistingItem(unfav, true)" class="clearfix">
+					<img ng-src="{{unfav.image}}" alt="{{unfav.title}}" class="thumb" />
+					<strong class="title">{{ unfav.title }} <br/>Total Plays:{{unfav.previousPlays}} Total Votes:{{unfav.historicVotes}}</strong>
+					<p ng-show="unfav.album">{{unfav.album}}</p>
+				</a>
+				<img ng-src="/img/addToPlaylist.png" alt="Add to playlist" class="addToPlaylist" ng-click="addExistingItem(unfav, false)"  />
+				<em class="views" ng-show="unfav.views > 0 ">{{ rec.views}} <i>views</i></em>
+			</li>
+		</ul>
+	</div>
+
 
 </div>
 

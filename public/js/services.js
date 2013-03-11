@@ -105,6 +105,16 @@ angular.module('jukeboxServices', ['ngResource'])
 				var url = "/data/stream/" + streamId + "/item/favs";
 				var r = $http.get(url);
 				r.success(success);
+			},
+			getUnFavs: function(streamId, success) {
+				var url = "/data/stream/" + streamId + "/item/unfavs";
+				var r = $http.get(url);
+				r.success(success);
+			},
+			getRecents: function(streamId, success) {
+				var url = "/data/stream/" + streamId + "/item/recents";
+				var r = $http.get(url);
+				r.success(success);
 			}
 		};
 	})

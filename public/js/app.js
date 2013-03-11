@@ -109,10 +109,18 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 		});		
 	});
 	
-
 	StreamData.getFavs(streamId, function(data) {
 		$scope.favourites = data;
-	})
+	});
+
+	StreamData.getUnFavs(streamId, function(data) {
+		$scope.unfavourites = data;
+	});
+
+	StreamData.getRecents(streamId, function(data) {
+		$scope.recents = data;
+	});
+
 	$scope.addItem = function(item, closeResults) {
 		item.adding = true;
 		StreamData.addItem(streamId, { url : item.url }, function(saved) {
