@@ -408,7 +408,7 @@ module.exports = function(db, notifications, config) {
 			}
 			
 			var past = new Date();
-			past.setDate(past.getDate() - 30);
+			past.setDate(past.getDate() - config.oldiesThreshold);
 			var q = buildItemQuery(req, {
 				played:  true,				
 				lastPlayed : { $lte : past }
