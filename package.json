@@ -1,8 +1,8 @@
 {
-  "subdomain": "rockpooldigital.rockpool-jukebox",
-  "name": "rockpool-jukebox",
-  "description": "Rockpool Jukebox",
-  "version": "0.0.1-40",
+  "subdomain": "jbx",
+  "name": "jukebox",
+  "description": "Jukebox",
+  "version": "0.0.1-41",
   "private": true,
   "dependencies": {
     "express": "3.0.x",
@@ -33,6 +33,6 @@
     "node": "0.8.x"
   },
   "domains": [
-    "jukebox.rockpooldigital.com"
+    "jukebox.atommyb.com"
   ]
 }
