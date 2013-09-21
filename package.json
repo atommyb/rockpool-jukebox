@@ -2,7 +2,7 @@
   "subdomain": "jbx",
   "name": "jukebox",
   "description": "Jukebox",
-  "version": "0.0.1-41",
+  "version": "0.0.1-56",
   "private": true,
   "dependencies": {
     "express": "3.0.x",

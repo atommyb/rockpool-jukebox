@@ -208,10 +208,13 @@ angular.module('jukeboxServices', ['ngResource'])
 		var url = '/data/stream/' + $routeParams.streamId 
 							+ '/searchMedia?q=' + encodeURIComponent(q);
 							
-		console.log(url);
+		console.log("ItemSearch: " + url);
 		var promise = $http.get(url)
 		.success(success);
-		if (fail) { promise.fail(promise); }
+		if (fail) { 
+			console.log("ItemSearch failed: " + fail); 
+			promise.fail(promise); 
+		}
 	}
 })
 .factory('DesktopNotifications', function() {

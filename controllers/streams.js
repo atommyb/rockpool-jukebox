@@ -200,6 +200,7 @@ module.exports = function(db, notifications, config) {
 			//if it looks like a URL we can handle differently
 			//this regex is a bit lame
 			if (/^(https?:\/\/|www\.)/i.test(q)) {
+				console.log("if search", q);
 				return searchForUrl(q);
 			} else {
 				console.log("default search", q);
@@ -249,7 +250,8 @@ module.exports = function(db, notifications, config) {
 					totalVotes : 0,
 					historicVotes : 0,
 					plays : [],
-					type : data.type
+					type : data.type,
+					sticky: false
 				};
 
 				collection.insert(item, function(err, docs) {

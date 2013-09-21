@@ -273,6 +273,21 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 		});
 	};
 
+	$scope.makeSticky = function(item) {
+		//if already voted same then this is a cancel
+		console.log(item);
+		//if (item.sticky == true) { item.sticky = false; }
+
+		// StreamData.submitVote(item._id, weight, function(result) {
+		// 	item.totalVotes = result.newCount;
+		// 	item.currentVote = weight;
+		// 	sortItems();
+		// }, function(reason) {
+		// 	if (reason === "unauthorised") { return alert('You need to be logged in to vote'); }
+		// 	alert('Unknown error');
+		// });
+	};
+
 	$scope.flagItem = function(item) {
 		StreamData.flagItem(item._id, "user", function() {
 			alert("Item flagged. It will not be removed until somebody looks at the flagged list.");
