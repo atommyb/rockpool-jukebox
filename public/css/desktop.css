@@ -1616,21 +1616,44 @@ footer a img{
 
 }
 .party-mode #nowPlaying {
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 1000;
     margin: 0;
 
+    top: 2em;
+}
+.party-mode #nowPlaying iframe{
+	min-height: 100%;
 }
 .party-mode #nowPlaying .thumbWrap {
-	border: 10px solid red;
+	/* border: 10px solid red; */
+	top: 0;
+	bottom: 0;
+	position: fixed;
+	height: 100%;
 }
 .party-mode #onNow {
     width: 100%;
     margin: 0;
  /*   font-size: 2em;
     padding-top: .25em; */
+    position: fixed;
+    top: 0;
+    left: 0;
 }
+
+.party-mode #megaPlayer {
+	margin-top:.25em;
+	display: block;
+	bottom: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+}
+
 /* shhhh! */
 .party-mode .controls,
 .party-mode footer {
