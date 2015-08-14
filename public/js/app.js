@@ -50,7 +50,7 @@ project.controller('ListStreams', function($scope, $rootScope, $location, Stream
 
 	var streams = existingStreams ? StreamData.getStreams() : [];
 	$scope.streams =streams;
-	$scope.addStream = function() { 
+	$scope.addStream = function() {
 		StreamData.addStream({ name : $scope.stream.name }, function(saved) {
 			$scope.streams.push(saved);
 			if (!existingStreams) {
@@ -87,13 +87,13 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 	}
 
 	$scope.isHostPlaying = false;
-	
+
 	$scope.items = [];
 
 	$scope.stream = StreamData.getStream({ streamId : streamId}, function(stream) {
 		$rootScope.page_title = stream.name;
 		$scope.items = StreamData.getItems({ streamId : streamId}, function() {
-			StreamNotification.notifyJoin($scope.stream._id);	
+			StreamNotification.notifyJoin($scope.stream._id);
 				interval = setInterval(function (){
 			    $scope.$apply(function() {
 			    	if ($scope.isHostPlaying) {
@@ -106,9 +106,9 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 			  	clearTimeout(interval);
 				});
 			sortItems();
-		});		
+		});
 	});
-	
+
 	StreamData.getFavs(streamId, function(data) {
 		$scope.favourites = data;
 	});
@@ -139,7 +139,7 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 			} else {
 				alert('Unknown Error');
 			}
-			
+
 			item.adding = false;
 		});
 	};
@@ -162,7 +162,7 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 			} else {
 				alert('Unknown Error');
 			}
-			
+
 			item.adding = false;
 		});
 	};
@@ -171,8 +171,8 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 		delay(function() {
 			var q = $scope.entry.url;
 
-			if (!q || q.length < 4) { 
-				return ; 
+			if (!q || q.length < 4) {
+				return ;
 			}
 
 			ItemSearch(q, function(result) {
@@ -192,7 +192,7 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 		}
 
 		if ($scope.nowPlaying) {
-			return fail();	
+			return fail();
 		}
 
 		StreamData.isHostAlive(streamId, function(response) {
@@ -248,7 +248,7 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 
 
 	$scope.skipCurrent = function() {
-		if (!$scope.nowPlaying) { 
+		if (!$scope.nowPlaying) {
 			return;
 		}
 		//if we are the host we can just skip and not bother with notifications
@@ -297,7 +297,7 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 	};
 
 	$scope.enableNotifications = function() {
-		DesktopNotifications.request(); 
+		DesktopNotifications.request();
 	}
 
 	StreamNotification.setOnPlay(function(data) {
@@ -308,14 +308,14 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 
 		//load item for displaying
 		var item = findStreamItemInSet($scope.items, data.id);
-				
+
 		if (item !== null) {
 			var index = $scope.items.indexOf(item);
 			$scope.items.splice(index, 1);
 			$scope.nowPlaying = item;
 
 			DesktopNotifications.showPlaying(item);
-		}		
+		}
 	});
 
 	StreamNotification.setOnItemAdded(function(data) {
@@ -356,8 +356,8 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 		}
 	});
 
-	StreamNotification.setOnItemVoted(function(data) { 
-		//todo: if you are logged in on two browsers and you vote on one, the other will not 
+	StreamNotification.setOnItemVoted(function(data) {
+		//todo: if you are logged in on two browsers and you vote on one, the other will not
 		//update the thumb thing
 
 		var itemInSet = findStreamItemInSet($scope.items, data.id);

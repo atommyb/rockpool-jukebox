@@ -16,7 +16,7 @@
 			}
 		</script>
 	</section>
-	<div class="clearfix" id="nowPlaying">	
+	<div class="clearfix" id="nowPlaying">
 		<!-- <h2 id="onNow">Now playing</h2>		 -->
 		<h2 id="onNow">
 			<span ng-show="!nowPlaying ">Nothing currently playing</span>
@@ -30,7 +30,7 @@
 			<span class="thumb" ng-show="!isHostPlaying">
 				<img ng-show="nowPlaying.image" src="/img/1x1.png" style="background:url({{nowPlaying.image}}) 50% 50% no-repeat;" alt="{{nowPlaying.title}}" class="art" />
 				<img ng-show="!nowPlaying.image" src="/img/1x1.png" alt="Add some songs, then click play" class="art" ng-class="{'stopped art': !nowPlaying.image, 'art': nowPlaying.image}" />
-			</span>			
+			</span>
 		</aside>
 		<!-- TODO:: Add tagging so we can use themes & suggestions -->
 		<!-- <input type="text" placeholder="add tags or themes for this song..." style="width:60%; margin-top:2em;"><button>Add</button> -->
@@ -44,8 +44,8 @@
 		</legend>
 
 		<section id="resultsWrap" class="clearfix">
-			<input class="txtUrl" type="text" name="url" ng-model="entry.url"  ng-change="lookupItem()" placeholder="e.g. 'Hello Lazarus' or 'Magnus Puto'" onfocus="toggleSearching();" />	
-				
+			<input class="txtUrl" type="text" name="url" ng-model="entry.url"  ng-change="lookupItem()" placeholder="e.g. 'Hello Lazarus' or 'Magnus Puto'" onfocus="toggleSearching();" />
+
 			<section id="ytResults" ng-show="entry.youtubeResults">
 				<ul>
 					<li ng-repeat="yt in entry.youtubeResults" ng-class="{ added : yt.added , adding : yt.adding }" class="clearfix">
@@ -55,13 +55,14 @@
 							<p ng-show="yt.album">{{yt.album}}</p>
 						</a>
 						<img ng-src="/img/addToPlaylist.png" alt="Add to playlist" class="addToPlaylist" ng-click="addItem(yt, false)"  />
-						<em class="views" ng-show="yt.views > 0 ">{{ yt.views}} <i>views</i></em>
+            <em class="views" ng-show="yt.views">{{ yt.views }} <i>views</i></em>
+						<em class="likes" ng-show="yt.likes">{{ yt.likes }} <i class="fa fa-heart"></i></em>
 					</li>
 				</ul>
 				<img src="/img/close.png" alt="Close" class="close" ng-click="closeSearchResults()"/>
 			</section>
 			<!-- <section id="instructions">
-				
+
 				<h2>What next...</h2>
 				<ol >
 					<li>Search YouTube for amazing (or questionable!) music</li>
@@ -70,11 +71,11 @@
 				</ol>
 			</section> -->
 			<img src="/img/poweredbyyoutube.png" alt="YouTube&trade;" class="poweredByYT" />
-			
+
 			<!-- <a href="mailto:{{}}"><img src="/img/email.png" alt="Send to a friend"/></a> -->
-			
+
 		</section>
-		
+
 		<div id="host" class="clearfix">
 			<h3>Host this stream</h3>
 			<button ng-click="startHostPlaying()" ng-hide="isHostPlaying" ng-disabled="isHostPlaying" class="start-btn animated bounce"><img src="/img/play.png" alt="" /> Start stream</button>
@@ -107,7 +108,7 @@
 			<li ng-repeat="item in items" class="item clearfix type-{{item.type || 'unknown'}}" id="item-{{item._id}}"  style="background:#000 url({{item.image}}) 50% 50% no-repeat;">
 				<!-- <span class="thumb"><img ng-src="{{item.image}}" alt="" /></span> -->
 				<span class="info">
-					<h4 class="title">{{item.title}}</h4>					
+					<h4 class="title">{{item.title}}</h4>
 					<span class="extra">
 						<ul class="trackInfo">
 							<li>Played - {{item.previousPlays}} time(s)</li>
@@ -116,12 +117,12 @@
 							<li ng-show="item.lastPlayed">Played - {{item.lastPlayed | date:'dd/MM'}}</li>
 						</ul>
 						<!-- <ul class="icons clearfix">
-							<li style="display:none;"><button class="trash">Trash</button></li> 
+							<li style="display:none;"><button class="trash">Trash</button></li>
 							<li><button class="flag" ng-click="flagItem(item)" title="Flag this item">Flag</button></li>
 						</ul> -->
 					</span>
 				</span>
-				
+
 				<img src="/img/vUp.png"  ng-click="submitVote(item, 1)" ng-class="{ voteActive: item.currentVote == 1}" class="voteUp" title="Vote up!" alt="Vote up!" />
 				<img src="/img/sticky.png"  ng-click="makeSticky(item)" ng-class="{ stuck: item.sticky == 1}" class="sticky" title="Stick the song to the stream" alt="Stick the song to the stream" />
 
@@ -133,7 +134,7 @@
 </div>
 
 <div id="fillIt" class="clearfix">
-	<div class="col favs">		
+	<div class="col favs">
 		<h2>Crowd favourites</h2>
 		<ul>
 			<li ng-repeat="fav in favourites" ng-class="{ added : fav.added , adding : fav.adding }" class="clearfix">
@@ -147,7 +148,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="col recents">		
+	<div class="col recents">
 		<h2>Recently played</h2>
 		<ul>
 			<li ng-repeat="rec in recents" ng-class="{ added : rec.added , adding : rec.adding }" class="clearfix">
@@ -161,7 +162,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="col unfavs">		
+	<div class="col unfavs">
 		<h2>Oldies</h2>
 		<ul>
 			<li ng-repeat="unfav in unfavourites" ng-class="{ added : unfav.added , adding : unfav.adding }" class="clearfix">
@@ -182,14 +183,14 @@
 <script>
 	_gaq.push(['_trackPageview',location.pathname + location.search  + location.hash]);
 </script>
-	
 
 
-<!-- 
+
+<!--
 <a href="#" id="showHideFeedback">Feedback</a>
 <div id="feedback" class="clearfix">
 	<h2>Help improve the Jukebox</h2>
-	<p>Some content here</p>			
+	<p>Some content here</p>
 	<a href="#" class="close"><img src="/img/close.png" alt="Close" class="close" ng-click="closeSearchResults()"/></a>
 </div>
  -->
