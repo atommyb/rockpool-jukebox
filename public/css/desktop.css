@@ -680,7 +680,14 @@ textarea {resize: vertical;}
 }
 
 #ytResults li.added {
-	display:none;
+  opacity: 0.5;
+}
+#ytResults li.added * {
+  cursor: not-allowed !important;
+}
+#ytResults li.adding .addToPlaylist,
+#ytResults li.added .addToPlaylist{
+  display: none;
 }
 
 #ytResults li:hover{
@@ -717,7 +724,9 @@ textarea {resize: vertical;}
 	text-align: right;
 	line-height: 1.1em;
 }
-#ytResults li .addToPlaylist {
+#ytResults li .addToPlaylist,
+#ytResults li .fa-spinner,
+#ytResults li .fa-check {
 	float: right;
 	margin:5px 5px 0 10px;
 	cursor: pointer;
@@ -1735,8 +1744,17 @@ footer a img{
 	cursor: wait;
 }
 
-#fillIt li.added {
+
+#fillIt li.adding .addToPlaylist,
+#fillIt li.added .addToPlaylist {
 	display:none;
+}
+
+#fillIt li.added {
+  opacity: 0.5;
+}
+#fillIt li.added * {
+  cursor: not-allowed !important;
 }
 
 #fillIt li:hover{
@@ -1773,12 +1791,23 @@ footer a img{
 	text-align: right;
 	line-height: 1.1em;
 }
-#fillIt li .addToPlaylist {
-	float: right;
-	margin:15px 2% 0 0;
-	cursor: pointer;
-	width: 7%;
-	/*min-width: 30px;*/
+#fillIt li .addToPlaylist,
+#fillIt li .fa {
+  float: right;
+  margin:15px 2% 0 0;
+  cursor: pointer;
+  width: 7%;
+  /*min-width: 30px;*/
+}
+#ytResults li .fa-spinner,
+#ytResults li .fa-check,
+#fillIt li .fa-spinner,
+#fillIt li .fa-check {
+  font-size: 2.7em;
+}
+#ytResults li .fa-check,
+#fillIt li .fa-check {
+  color: green;
 }
 
 /* List the streams */
