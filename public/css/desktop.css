@@ -715,6 +715,7 @@ textarea {resize: vertical;}
 
 }
 #ytResults li .views,
+#ytResults li .duration,
 #ytResults li .likes{
 	float: right;
 	font-size: .8em;
@@ -728,7 +729,7 @@ textarea {resize: vertical;}
 #ytResults li .fa-spinner,
 #ytResults li .fa-check {
 	float: right;
-	margin:5px 5px 0 10px;
+	margin:5px 5px 5px 10px;
 	cursor: pointer;
 	width: 5%;
 	min-width: 30px;
