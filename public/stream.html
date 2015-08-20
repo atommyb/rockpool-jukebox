@@ -58,6 +58,7 @@
             <i class="fa" ng-class="{ 'fa-check' : yt.added , 'fa-spinner fa-spin' : yt.adding }"></i>
             <em class="views" ng-show="yt.views">{{ yt.views }} <i>views</i></em>
             <em class="likes" ng-show="yt.likes">{{ yt.likes }} <i class="fa fa-heart"></i></em>
+            <em class="duration" ng-show="yt.duration">{{ yt.duration }}</i></em>
           </li>
         </ul>
         <img src="/img/close.png" alt="Close" class="close" ng-click="closeSearchResults()"/>
