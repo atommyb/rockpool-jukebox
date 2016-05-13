@@ -184,8 +184,8 @@ function initialiseApplication(db) {
 		res.render('app.html', data);
 	});
 
-	server.listen(config.PORT);
-	console.log("listening on port " + config.PORT);
+	server.listen(process.env.PORT || config.PORT);
+	console.log("listening on port " + (process.env.PORT || config.port));
 }
 
 getDb(function(err, db) {
