@@ -1,4 +1,5 @@
 var mongo = require('mongodb');//, Server = mongo.Server, Db = mongo.Db;
+mongo.BSONPure = require('bson').BSONPure
 var BSON = mongo.BSONPure;
 var search = require('../lib/search.js');
 var config = require('../config.js');
@@ -81,6 +82,7 @@ module.exports = function(db, notifications, config) {
 			var collection = db.collection('streams');
 
 			if (req.params.id) {
+				console.log(req.params.id)
 				collection.findOne({ _id : new BSON.ObjectID(req.params.id) }, function(err, result) {
 					if (err) return next(err);
 					res.send(result);

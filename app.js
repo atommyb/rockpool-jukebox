@@ -17,12 +17,12 @@ var server = new  mongo.Server(
 function getDb(next) {
 	var db = new mongo.Db(config.DB_NAME || 'jukebox', server, { safe : true });
 	db.open(function(err, db) {
-		//console.log(err, db);
 		if (err) return next(err);
 		if (!config.DB_USER) {
 			next(null, db);
 		} else {
 			db.authenticate(config.DB_USER, config.DB_PASS, function(err, replies) {
+				console.log("DB:", replies)
 				if(err) return next(err);
 				next(null, db);
 			});
@@ -181,6 +181,26 @@ function initialiseApplication(db) {
 				suppressPublicStreams : config.suppressPublicStreams || false
 			}
 		};
+		// console.log("Response: ")
+		// console.log("+++++++: ")
+		// console.log("+++++++: ")
+		// console.log("+++++++: ")
+		// console.log("+++++++: ")
+		// console.log("+++++++: ")
+		// console.log("+++++++: ")
+		// console.log("+++++++: ")
+		// console.log("+++++++: ")
+		// console.log(res)
+		// console.log("Data: ")
+		// console.log("-------: ")
+		// console.log("-------: ")
+		// console.log("-------: ")
+		// console.log("-------: ")
+		// console.log("-------: ")
+		// console.log("-------: ")
+		// console.log("-------: ")
+		// console.log("-------: ")
+		// console.log(data)
 		res.render('app.html', data);
 	});
 
