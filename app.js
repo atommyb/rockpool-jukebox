@@ -17,7 +17,6 @@ var server = new  mongo.Server(
 function getDb(next) {
 	var db = new mongo.Db(process.env.DB_NAME || 'jukebox', server, { safe : true });
 	db.open(function(err, db) {
-		//console.log(err, db);
 		if (err) return next(err);
 		if (!process.env.DB_USER) {
 			next(null, db);
@@ -128,7 +127,6 @@ function initialiseApplication(db) {
 	app.use(express.static(__dirname + '/public'));
 
 	io.set('log level', 1); 
-	//console.log(io);
 	var notifications = require('./notification-sockets').create(io);
 	//sockets.setup();
 
@@ -189,7 +187,6 @@ function initialiseApplication(db) {
 }
 
 getDb(function(err, db) {
-	//console.log("got db", err, db);
 	if (err) {
 		return console.log(err);
 	}
