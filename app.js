@@ -22,7 +22,6 @@ function getDb(next) {
 			next(null, db);
 		} else {
 			db.authenticate(config.DB_USER, config.DB_PASS, function(err, replies) {
-				console.log("DB:", replies)
 				if(err) return next(err);
 				next(null, db);
 			});
@@ -128,7 +127,6 @@ function initialiseApplication(db) {
 	app.use(express.static(__dirname + '/public'));
 
 	io.set('log level', 1); 
-	//console.log(io);
 	var notifications = require('./notification-sockets').create(io);
 	//sockets.setup();
 
@@ -181,26 +179,6 @@ function initialiseApplication(db) {
 				suppressPublicStreams : config.suppressPublicStreams || false
 			}
 		};
-		// console.log("Response: ")
-		// console.log("+++++++: ")
-		// console.log("+++++++: ")
-		// console.log("+++++++: ")
-		// console.log("+++++++: ")
-		// console.log("+++++++: ")
-		// console.log("+++++++: ")
-		// console.log("+++++++: ")
-		// console.log("+++++++: ")
-		// console.log(res)
-		// console.log("Data: ")
-		// console.log("-------: ")
-		// console.log("-------: ")
-		// console.log("-------: ")
-		// console.log("-------: ")
-		// console.log("-------: ")
-		// console.log("-------: ")
-		// console.log("-------: ")
-		// console.log("-------: ")
-		// console.log(data)
 		res.render('app.html', data);
 	});
 
@@ -209,7 +187,6 @@ function initialiseApplication(db) {
 }
 
 getDb(function(err, db) {
-	//console.log("got db", err, db);
 	if (err) {
 		return console.log(err);
 	}

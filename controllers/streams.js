@@ -110,7 +110,7 @@ module.exports = function(db, notifications, config) {
 
 			collection.insert(item, function(err, docs) {
 				if (err) return next(err);
-				res.send(docs[0]);
+				res.send(docs.ops[0]);
 			});		
 		},
 
@@ -258,7 +258,11 @@ module.exports = function(db, notifications, config) {
 
 				collection.insert(item, function(err, docs) {
 					if (err) return next(err);
-					var toSend = processResult(docs[0], req.user);
+					console.log("err: ", err)
+					console.log("docs: ", docs)
+					console.log("docs.ops[0]: ", docs.ops[0])
+					console.log("req.user: ", req.user)
+					var toSend = processResult(docs.ops[0], req.user);
 					res.send(toSend);
 					notifications.notifyAdd(toSend);
 				});	
