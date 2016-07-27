@@ -2,7 +2,7 @@ var mongo = require('mongodb');//, Server = mongo.Server, Db = mongo.Db;
 mongo.BSONPure = require('bson').BSONPure
 var BSON = mongo.BSONPure;
 var search = require('../lib/search.js');
-var config = require('../config.js');
+var config = require('../heroku-config.js');
 
 function processResult(item, user) {
 	var playCount =  item.plays ? item.plays.length : 0;
@@ -209,7 +209,7 @@ module.exports = function(db, notifications, config) {
 				var func;
 				var m = /^([a-z]{2})\s/.exec(q);
 
-				if (m && prefixes[m[1]] && config.allowedItemTypes.indexOf(m[1]) !== -1) {
+				if (m && prefixes[m[1]] && process.env.allowedItemTypes.indexOf(m[1]) !== -1) {
 					executeSearch(m[1], req.query.q.slice(3));				
 				} else {
 					if (req.params.streamId) {
@@ -396,7 +396,7 @@ module.exports = function(db, notifications, config) {
 			
 			var q = buildItemQuery(req, {
 				played:  true,				
-				playCount : { $gte : config.favsThreshold }
+				playCount : { $gte : process.env.favsThreshold }
 			});
 
 			db.collection('items')
@@ -416,7 +416,7 @@ module.exports = function(db, notifications, config) {
 			}
 			
 			var past = new Date();
-			past.setDate(past.getDate() - config.oldiesThreshold);
+			past.setDate(past.getDate() - process.env.oldiesThreshold);
 			var q = buildItemQuery(req, {
 				played:  true,				
 				lastPlayed : { $lte : past }

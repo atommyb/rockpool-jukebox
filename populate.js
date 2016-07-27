@@ -1,6 +1,6 @@
 var request = require('request');
 var config = require('./config');
-var serverUrl =  config.URL, THRESHOLD = 5, ADD = 5;
+var serverUrl =  process.env.URL, THRESHOLD = 5, ADD = 5;
 
 
 

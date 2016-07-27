@@ -1,4 +1,4 @@
-var  config = require('./config.js'),
+var  config = require('./heroku-config.js'),
 	express = require('express'),
 	mongo = require('mongodb');
 var MemoryStore = require('connect').session.MemoryStore
@@ -6,22 +6,22 @@ var MemoryStore = require('connect').session.MemoryStore
   ,FacebookStrategy = require('passport-facebook').Strategy
 	,BSON = mongo.BSONPure; 
 
-config.allowedItemTypes = config.allowedItemTypes || ['yt', 'sp', 'sc', 'vm'];
+process.env.allowedItemTypes = process.env.allowedItemTypes || ['yt', 'sp', 'sc', 'vm'];
 
 var server = new  mongo.Server(
-	config.DB_HOST || 'localhost', 
-	config.DB_PORT || 27017, 
+	process.env.DB_HOST || 'localhost', 
+	process.env.DB_PORT || 27017, 
 	{ auto_reconnect: true }
 );
 
 function getDb(next) {
-	var db = new mongo.Db(config.DB_NAME || 'jukebox', server, { safe : true });
+	var db = new mongo.Db(process.env.DB_NAME || 'jukebox', server, { safe : true });
 	db.open(function(err, db) {
 		if (err) return next(err);
-		if (!config.DB_USER) {
+		if (!process.env.DB_USER) {
 			next(null, db);
 		} else {
-			db.authenticate(config.DB_USER, config.DB_PASS, function(err, replies) {
+			db.authenticate(process.env.DB_USER, process.env.DB_PASS, function(err, replies) {
 				if(err) return next(err);
 				next(null, db);
 			});
@@ -88,8 +88,8 @@ function initialiseApplication(db) {
 	}
 
 	passport.use(new FacebookStrategy({
-	    clientID: config.FACEBOOK_APP_ID,
-	    clientSecret: config.FACEBOOK_APP_SECRET
+	    clientID: process.env.FACEBOOK_APP_ID,
+	    clientSecret: process.env.FACEBOOK_APP_SECRET
 	  },
 	  facebookCallback
 	));
@@ -162,7 +162,7 @@ function initialiseApplication(db) {
 	app.get('/data/stream/:streamId/hostIsAlive', streamsCtrl.hostIsActive);
 	app.get('/data/stream/:id', streamsCtrl.streams);
 	
-	if (!config.suppressPublicStreams) {
+	if (!process.env.suppressPublicStreams) {
 		app.get('/data/stream', streamsCtrl.streams);
 	}
 
@@ -176,14 +176,14 @@ function initialiseApplication(db) {
 		var data = { 
 			user : req.user ,
 			config : {
-				suppressPublicStreams : config.suppressPublicStreams || false
+				suppressPublicStreams : process.env.suppressPublicStreams || false
 			}
 		};
 		res.render('app.html', data);
 	});
 
-	server.listen(config.PORT);
-	console.log("listening on port " + config.PORT);
+	server.listen(process.env.PORT);
+	console.log("listening on port " + process.env.PORT);
 }
 
 getDb(function(err, db) {

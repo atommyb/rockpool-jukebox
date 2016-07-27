@@ -8,7 +8,7 @@ module.exports = {
 			if (req.query.returnUrl && req.query.returnUrl.indexOf('#/') === 0) {
 				returnUrl = req.query.returnUrl;
 			}
-			return  config.URL + '/auth/facebook/callback?returnUrl=' + encodeURIComponent(returnUrl);	
+			return  process.env.URL + '/auth/facebook/callback?returnUrl=' + encodeURIComponent(returnUrl);	
 		};
 
 		return {
