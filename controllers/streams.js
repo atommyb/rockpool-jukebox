@@ -15,24 +15,24 @@ function processResult(item, user) {
 	}
 	
 	var result = {
-		_id : item._id,
-		streamId: item.streamId,
-		title: item.title,
-		description : item.description,
-		url : item.url,
-		image: item.image,
-		openGraph : item.openGraph,
-		created : item.created,
-		lastRequested : item.lastRequested || item.created,
-		totalVotes : item.totalVotes,
-		historicVotes : item.historicVotes || 0,
+		_id : item.value._id,
+		streamId: item.value.streamId,
+		title: item.value.title,
+		description : item.value.description,
+		url : item.value.url,
+		image: item.value.image,
+		openGraph : item.value.openGraph,
+		created : item.value.created,
+		lastRequested : item.value.lastRequested || item.value.created,
+		totalVotes : item.value.totalVotes,
+		historicVotes : item.value.historicVotes || 0,
 		previousPlays : playCount,
 		currentVote: 0,
 		lastPlayed : lastPlayed,
-		type: item.type
+		type: item.value.type
 	};
-
-	if (!result.type&& result.url.indexOf("spotify:") === 0) {
+	
+	if (!result.type && result.url.indexOf("spotify:") === 0) {
 		result.type = "Spotify";
 	}
 
