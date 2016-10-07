@@ -1,0 +1,97 @@
+<!doctype html>
+<html ng-app="project">
+  <head>
+    <title ng-bind="(page_title && (page_title + ' - ')) + 'Rockpool Jukebox'"></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <!-- Google Font pairings - http://bit.ly/qCTNeX -->
+    <!-- Lobster & Cabin -->
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/desktop.css">
+
+  </head>
+  <body class="{{page_title}}">
+    <header id="header" class="clearfix">
+      <a href="#" target="_blank" id="logoWrap"><img src="/img/radio-icon.jpg" alt="" id="logo" /></a>
+
+<!--       <%if (!user) { %>
+        <a id="login" href="/auth/facebook" title="We won't use your data other than to vote."><img src="img/fb.png" alt="Facebook "/>Login <em>to vote</em></a>
+      <% } else { %>
+        <p id="loggedIn"><img src="img/fb.png" alt="Facebook "/><a href="/logout" id="logout">Logout</a></p>
+      <% } %> -->
+    </header>
+
+
+    <div id="app" ng-view></div>
+
+
+    <!-- <footer>
+      <p>Made by <a href="http://www.rockpooldigital.com" target="_blank"><img src="img/rck-logo.png" alt="Rockpool" /></a> using <a href="http://www.w3.org/html/logo/#the-technology"><img src="http://www.w3.org/html/logo/badge/html5-badge-h-connectivity-css3-semantics.png" width="197" height="64" alt="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, and Semantics" title="HTML5 Powered with Connectivity / Realtime, CSS3 / Styling, and Semantics"></a>
+      </p>
+    </footer> -->
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://connect.soundcloud.com/sdk.js"></script>
+    <script src="http://w.soundcloud.com/player/api.js"></script>
+    <script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular-resource.min.js"></script>
+    <script src="/js/mega-player.js"></script>
+    <script src="/js/services.js"></script>
+    <script src="/js/directives.js"></script>
+
+
+    <script>
+      var config = <%- JSON.stringify(config) %>;
+      angular.module('jukeboxConfiguration', [])
+            .factory('StaticConfiguration', function() {
+              return config;
+            });
+    </script>
+
+
+    <script src="/js/app.js"></script>
+
+    <script>
+      $(function() {
+        $('#login').click(function() {
+          //console.dir(location);
+          var target = $(this).attr('href') + "?returnUrl=" + encodeURIComponent(location.hash);
+          //alert(target);
+          window.location=target;
+          return false;
+        });
+
+          if (jQuery.browser.msie) {
+              $('#app').remove();
+               alert('Sorry, this is a prototype and your browser is currently not supported. Perhaps try Google Chrome or Firefox.');
+           return;
+          }
+
+          // console.log(jQuery.browser)
+
+      });
+    </script>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-37927636-2Xxxxxxxxxx']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+  </body>
+</html>

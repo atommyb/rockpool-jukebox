@@ -87,12 +87,12 @@ function initialiseApplication(db) {
 		});
 	}
 
-	passport.use(new FacebookStrategy({
-	    clientID: process.env.FACEBOOK_APP_ID,
-	    clientSecret: process.env.FACEBOOK_APP_SECRET
-	  },
-	  facebookCallback
-	));
+	// passport.use(new FacebookStrategy({
+	//     clientID: process.env.FACEBOOK_APP_ID,
+	//     clientSecret: process.env.FACEBOOK_APP_SECRET
+	//   },
+	//   facebookCallback
+	// ));
 
 	passport.serializeUser(function(id, done) {
 	  done(null, id);
@@ -130,14 +130,14 @@ function initialiseApplication(db) {
 	var notifications = require('./notification-sockets').create(io);
 	//sockets.setup();
 
-	var auth_controller = require('./controllers/authentication.js').createAuthController(config);
+	// var auth_controller = require('./controllers/authentication.js').createAuthController(config);
 	var streamsCtrl = require('./controllers/streams.js')(db, notifications, config);
 
 	//var searchCtrl = require('./controllers/search.js');
 
-	app.get('/auth/facebook', auth_controller.authFacebook);
-	app.get('/auth/facebook/callback', auth_controller.authFacebookCallback);
-	app.get('/logout', auth_controller.logout);
+	// app.get('/auth/facebook', auth_controller.authFacebook);
+	// app.get('/auth/facebook/callback', auth_controller.authFacebookCallback);
+	// app.get('/logout', auth_controller.logout);
 
 	app.get('/data/stream/:streamId/searchMedia', streamsCtrl.searchMedia);
 	app.get('/data/search/youTube', streamsCtrl.searchMedia);

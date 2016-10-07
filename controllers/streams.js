@@ -390,6 +390,7 @@ module.exports = function(db, notifications, config) {
 		},
 
 		itemFindFavs: function(req, res, next) {
+			console.log(req)
 			if (!req.params.streamId) {
 				res.send(400); return;
 			}

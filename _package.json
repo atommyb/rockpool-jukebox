@@ -36,9 +36,5 @@
   },
   "domains": [
     "jukebox.atommyb.com"
-  ],
-  "devDependencies": {
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
-  }
+  ]
 }
