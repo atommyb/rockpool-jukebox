@@ -123,6 +123,7 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 
 	$scope.addItem = function(item, closeResults) {
 		item.adding = true;
+
 		StreamData.addItem(streamId, { url : item.url }, function(saved) {
 			item.added=  true;
 			item.adding = false;
@@ -134,9 +135,12 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 				$scope.entry.url = "";
 			}
 		}, function(err,a,b) {
+			alert('Here');
 			if (err.data === "Duplicate") {
 				alert('This item is already queued');
 			} else {
+				console.log("ERROR HERE")
+				console.log(arguments)
 				alert('Unknown Error');
 			}
 
@@ -147,7 +151,7 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 	$scope.addExistingItem = function(item, closeResults) {
 		item.adding = true;
 		StreamData.addItem(streamId, { url : item.url }, function(saved) {
-			item.added=  true;
+			item.added = true;
 			item.adding = false;
 			//wait for notification instead
 			//$scope.items.push(saved);
@@ -160,8 +164,9 @@ project.controller('Stream', function($rootScope, $scope, $location, $routeParam
 			if (err.data === "Duplicate") {
 				alert('This item is already queued');
 			} else {
-				alert('Unknown Error');
+				alert('Unknown Error blah');
 			}
+			console.log(err, a, b)
 
 			item.adding = false;
 		});

@@ -15,21 +15,21 @@ function processResult(item, user) {
 	}
 	
 	var result = {
-		_id : item.value._id,
-		streamId: item.value.streamId,
-		title: item.value.title,
-		description : item.value.description,
-		url : item.value.url,
-		image: item.value.image,
-		openGraph : item.value.openGraph,
-		created : item.value.created,
-		lastRequested : item.value.lastRequested || item.value.created,
-		totalVotes : item.value.totalVotes,
-		historicVotes : item.value.historicVotes || 0,
+		_id : item._id,
+		streamId: item.streamId,
+		title: item.title,
+		description : item.description,
+		url : item.url,
+		image: item.image,
+		openGraph : item.openGraph,
+		created : item.created,
+		lastRequested : item.lastRequested || item.created,
+		totalVotes : item.totalVotes,
+		historicVotes : item.historicVotes || 0,
 		previousPlays : playCount,
 		currentVote: 0,
 		lastPlayed : lastPlayed,
-		type: item.value.type
+		type: item.type
 	};
 	
 	if (!result.type && result.url.indexOf("spotify:") === 0) {
@@ -82,7 +82,7 @@ module.exports = function(db, notifications, config) {
 			var collection = db.collection('streams');
 
 			if (req.params.id) {
-				console.log(req.params.id)
+				// console.log(req.params.id)
 				collection.findOne({ _id : new BSON.ObjectID(req.params.id) }, function(err, result) {
 					if (err) return next(err);
 					res.send(result);
@@ -168,7 +168,7 @@ module.exports = function(db, notifications, config) {
 
 
 			function executeSearch(prefix, q) {
-				console.log(prefix,q);
+				// console.log(prefix,q);
 				var func = prefixes[prefix];
 				func(q, function(err, data) {
 					if (err) return next(err);
@@ -179,13 +179,13 @@ module.exports = function(db, notifications, config) {
 			function searchForUrl(url) {
 				//we want to route YouTube URLs through the search API so we can use filters etc.
 				if (url.indexOf('youtube.com/') !== -1) {
-					console.log("yt url search", url);
+					// console.log("yt url search", url);
 					return search.searchYoutube(url, function(err, results) {
 						if (err) return next(err);
 						res.send(results);
 					});
 				} else {
-					console.log("og search", url);
+					// console.log("og search", url);
 					search.lookupTrack(url, function(err, r) {
 						if (err) return next(err);
 						return res.send([{
@@ -202,7 +202,7 @@ module.exports = function(db, notifications, config) {
 			//if it looks like a URL we can handle differently
 			//this regex is a bit lame
 			if (/^(https?:\/\/|www\.)/i.test(q)) {
-				console.log("if search", q);
+				// console.log("if search", q);
 				return searchForUrl(q);
 			} else {
 				console.log("default search", q);
@@ -237,6 +237,7 @@ module.exports = function(db, notifications, config) {
 			var collection = db.collection('items');
 			var now = new Date();
 
+			// console.log("itemAdd", data)
 			function createNew(data) {
 				var item = {
 					streamId: new BSON.ObjectID(req.params.streamId),
@@ -284,7 +285,8 @@ module.exports = function(db, notifications, config) {
 					"new" : true
 				}, function(err, item) {
 					if (err) return next(err);
-					var toSend = processResult(item, req.user);
+					console.log(item)
+					var toSend = processResult(item.value, req.user);
 					res.send(toSend);
 					notifications.notifyAdd(toSend);
 				});
